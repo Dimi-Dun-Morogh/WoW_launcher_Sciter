@@ -1,0 +1,68 @@
+<html window-frame="none" window-resizable="false">
+  <head>
+    <title>settings</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="settings-win.js" defer></script>
+    <style>
+        @import url(sciter:msgbox.css);
+      body {
+        margin: 0;
+      }
+
+
+      #content {
+        height: 500px;
+        width: 500px;
+        background-color: black;
+        color:#fff;
+      }
+      #settings-inner {
+        background-color: #fff;
+        height: 500px;
+        width: 500px;
+        horizontal-align:center;
+        overflow-y: scroll;
+      }
+      #settings-inner h1 {
+        margin-right: *;
+        margin-left: *;
+      }
+
+    </style>
+    <script type="module"></script>
+    <script>
+
+var passedParameters =  Window.this.parameters; // { foo:"bar" here }
+// var root = document.querySelector("#content");
+//root.innerHTML =  passedParameters.foo;
+console.log(passedParameters)
+// document.body.append(<div>ID: {passedParameters.foo}</div>);
+// Window.this.caption = passedParameters.foo;
+
+// document.on('ready',()=>{
+//   pop()
+//   root.innerHTML = ''
+// })
+// sctr.on('load',()=>{
+//   pop()
+// })
+
+
+    </script>
+  </head>
+  <body>
+    <!-- <main#content> -->
+      <div#settings-inner>
+        <h1>edit realmlists</h1>
+        <div.settings-input-wrap .add-settings-wrap>
+          <input|text(textEdit) .settings-input  novalue="set realmlist xxxxxx"/> <button#settings-btn .btn><icon|plus  .center .btn/></button>
+          <!-- <button#settings-btn .btn><icon|i-cross   .center .btn/></button> -->
+        </div>
+        <div.settings-input-wrap>
+          <input|text(textEdit) .settings-input value="set realmlist wocserver.org" /> <button#settings-btn .btn><icon|i-tick  .center .btn/></button>
+          <button#settings-btn .btn><icon|i-cross   .center .btn/></button>
+        </div>
+
+      </div>
+  </body>
+</html>
