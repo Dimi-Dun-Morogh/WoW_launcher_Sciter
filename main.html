@@ -1,119 +1,12 @@
 <html window-width="850dip" window-height="300px" window-resizable="false">
   <head>
     <title>WoW launcher</title>
-    <script src="script.js" defer></script>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="styles.css"/>
     <style>
       body {
         background-image: url("./bg.JPG");
       }
-      #container{
-        /* display:flex; flex-direction: row; justify-content: space-between; */
-        flow: horizontal;
-        /* horizontal-align: center; */
-        height: *;
-        /* background-color: rgb(252, 186, 3); */
-        border-spacing: *;
-        /* padding: 10px; */
-      }
-      #launch-btn{
-
-        display: block;
-        /* margin-top: 0.5*; */
-        /* margin-left: 0.5*; */
-        /* margin-right: 0.5*; */
-        margin-left: 0.5*;
-        margin-right: 0.5*;
-        margin-top: *;
-        width: 80%;
-        margin-bottom:*;
-        font-size: 150%;
-        font-weight: bold;
-      }
-      #account{
-        /* margin-left:1*; */
-      }
-      #realmlist,#account{
-        /* border:thin solid #000; */
-        min-width: 35%;
-        /* margin-top: 20px; */
-      }
-      #middle-section{
-        min-width: 25%;
-        /* border:thin solid #000; */
-        padding: 10px;
-        padding-top: 20px;
-      }
-      #middle-up {
-
-        flow: horizontal;
-        background-color: rgba(245, 250, 246, 0.6);
-      }
-      #middle-up-select{
-        font-size: 150%;
-        font-weight: bold;
-        margin-left:1*;
-        margin-top: *;
-        margin-bottom:*;
-      }
-      select|list {
-      display:block;
-      overflow-y: scroll-indicator;
-      width: 1*;
-      }
-      .center{
-   margin-left: auto;
-   margin-right: auto;
-   display: block !important;
-
- }
- #settings-btn {
-  font-size: 150%;
-  margin-top: *;
-  margin-bottom:*;
-
- }
- .column-header{
-padding-top: 30px;
-  background-color: rgba(245, 250, 246, 0.6);
- }
- .column-header  icon {
-
-  padding-left: 10px;
- }
-
- .btn{
-  background: #640402;
-  color:#fff;
-  /* background: rgb(49, 224, 84); */
-  border-color: #4c4a4f;
-  font-weight: bold;
-  border-radius: 5px;
- }
-
- .select{
-  font-weight: bold;
-  font-size: 130%;
-  background-color: rgba(245, 250, 246, 0.6);
- }
-
-  .icon {
-    background: #640402;
-    height: 40px;
-    width: 40px;
-    color: #fff!important;
-    border-radius: 50%;
-    margin-top: *;
-    margin-bottom:*;
-  }
-  .icon icon {
-    /* margin-left: auto; */
-   margin-right: 15px;
-   margin-top: 5px;
-  }
-  .edit-select-btn{
-    width: *;
-    font-size: 130%;
-  }
 
     </style>
   </head>
@@ -138,7 +31,7 @@ padding-top: 30px;
 </div>
 <div#middle-section>
 <div#middle-up>
-  <button#settings-btn .btn><icon|cog .center .btn name="path_settings"/></button>
+  <button#settings-btn .btn><icon|cog .center  name="path_settings"/></button>
   <div#middle-up-select>
     <button|radio(group) checked>TBC</button>
     <button|radio(group)>WoTLK</button>

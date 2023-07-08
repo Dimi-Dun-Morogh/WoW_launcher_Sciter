@@ -10,9 +10,10 @@
         "isDefault": true
       },
       "type": "shell",
-      "command": "scapp.exe",
-    //  "args": ["--debug"],
+      "command": "${workspaceRoot}/bin/scapp.exe",
+      "args": ["-${workspaceRoot}/main.hmtl"],
       "problemMatcher": []
     }
   ]
 }
+

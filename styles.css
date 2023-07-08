@@ -2,20 +2,14 @@ body {
   background-image: url("./bg.JPG");
 }
 #container{
-  /* display:flex; flex-direction: row; justify-content: space-between; */
   flow: horizontal;
-  /* horizontal-align: center; */
   height: *;
-  /* background-color: rgb(252, 186, 3); */
   border-spacing: *;
-  /* padding: 10px; */
 }
 #launch-btn{
 
   display: block;
-  /* margin-top: 0.5*; */
-  /* margin-left: 0.5*; */
-  /* margin-right: 0.5*; */
+
   margin-left: 0.5*;
   margin-right: 0.5*;
   margin-top: *;
@@ -24,17 +18,12 @@ body {
   font-size: 150%;
   font-weight: bold;
 }
-#account{
-  /* margin-left:1*; */
-}
+
 #realmlist,#account{
-  /* border:thin solid #000; */
   min-width: 35%;
-  /* margin-top: 20px; */
 }
 #middle-section{
   min-width: 25%;
-  /* border:thin solid #000; */
   padding: 10px;
   padding-top: 20px;
 }
@@ -79,10 +68,15 @@ padding-left: 10px;
 .btn{
 background: #640402;
 color:#fff;
-/* background: rgb(49, 224, 84); */
 border-color: #4c4a4f;
 font-weight: bold;
 border-radius: 5px;
+}
+
+.btn:hover{
+  background: #fff;
+color:#640402;
+cursor: pointer;
 }
 
 .select{
@@ -101,7 +95,6 @@ margin-top: *;
 margin-bottom:*;
 }
 .icon icon {
-/* margin-left: auto; */
 margin-right: 15px;
 margin-top: 5px;
 }
@@ -124,4 +117,24 @@ font-weight: bold;
 }
 .add-settings-wrap {
   margin-bottom: 20px;
+}
+
+
+#settings-inner {
+  background-color: rgba(244, 238, 238, 0.4);
+height: 300px;
+  width: 500px;
+  horizontal-align:center;
+  overflow-y: scroll;
+}
+#settings-inner h1 {
+  margin-right: *;
+  margin-left: *;
+}
+
+.input-title {
+  text-align: center;
+  margin-bottom: 10px;
+  display: block;
+  font-weight: bold;
 }
