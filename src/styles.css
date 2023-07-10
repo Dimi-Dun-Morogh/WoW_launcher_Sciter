@@ -50,7 +50,7 @@ margin-right: auto;
 display: block !important;
 
 }
-#settings-btn {
+#settings-btn, #add-realmlist-btn {
 font-size: 150%;
 margin-top: *;
 margin-bottom:*;

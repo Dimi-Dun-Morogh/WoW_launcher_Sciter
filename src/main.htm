@@ -1,13 +1,13 @@
 <html window-width="850dip" window-height="300px" window-resizable="false">
   <head>
     <title>WoW launcher</title>
-    <script src="main.js" defer></script>
+    <script src="main.js" defer type="module">
+    </script>
     <link rel="stylesheet" href="styles.css"/>
     <style>
       body {
         background-image: url("./bg.JPG");
       }
-
     </style>
   </head>
   <body>
@@ -16,18 +16,10 @@
   <div.column-header>
     <button.edit-select-btn #realmlist-btn .btn>edit realmlists<icon|edit /></button>
 </div>
-  <select|list.select>
-    <option>First</option>
-    <option selected>set realmlist tbc.tirisgarde.org</option>
-    <option>Third</option>
-    <option>set realmlist tbc.tirisgarde.org</option>
-    <option>Fifth</option>
-    <option>Sixth</option>
-    <option>Seventh</option>
-    <option>E1ight</option>
-    <option>Nineth</option>
-    <option>Tenth</option>
- </select>
+<div#realm-container>
+
+</div>
+
 </div>
 <div#middle-section>
 <div#middle-up>
@@ -46,7 +38,7 @@
 </div>
   <select|list.select>
     <option>First</option>
-    <option selected>Second</option>
+    <option selected key="1235">Second</option>
     <option>Third</option>
     <option>Fourth</option>
     <option>Fifth</option>
