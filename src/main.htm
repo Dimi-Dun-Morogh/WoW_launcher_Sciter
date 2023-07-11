@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css"/>
     <style>
       body {
-        background-image: url("./bg.JPG");
+        background-image: url("./bgtbc.JPG");
       }
     </style>
   </head>
@@ -24,9 +24,9 @@
 <div#middle-section>
 <div#middle-up>
   <button#settings-btn .btn><icon|cog .center  name="path_settings"/></button>
-  <div#middle-up-select>
-    <button|radio(group) checked>TBC</button>
-    <button|radio(group)>WoTLK</button>
+  <div#wow-v-select>
+    <button|radio(group) checked key="tbc">TBC</button>
+    <button|radio(group) key="wotlk">WoTLK</button>
   </div>
 </div>
 <button#launch-btn .btn>Launch WoW</button>
@@ -36,18 +36,13 @@
   <div.column-header>
     <button.edit-select-btn #accounts-btn .btn>edit accounts<icon|edit /></button>
 </div>
+<div#acc-select-wrap>
   <select|list.select>
     <option>First</option>
     <option selected key="1235">Second</option>
-    <option>Third</option>
-    <option>Fourth</option>
-    <option>Fifth</option>
-    <option>Sixth</option>
-    <option>Seventh</option>
-    <option>Eight</option>
-    <option>Nineth</option>
     <option>Tenth</option>
  </select>
+</div>
 </div>
 </div>
   </body>

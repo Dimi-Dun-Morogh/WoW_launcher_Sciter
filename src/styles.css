@@ -1,5 +1,5 @@
 body {
-  background-image: url("./bg.JPG");
+  background-image: url("./bgtbc.JPG");
 }
 #container{
   flow: horizontal;
@@ -32,7 +32,7 @@ body {
   flow: horizontal;
   background-color: rgba(245, 250, 246, 0.6);
 }
-#middle-up-select{
+#wow-v-select{
   font-size: 150%;
   font-weight: bold;
   margin-left:1*;
@@ -50,7 +50,7 @@ margin-right: auto;
 display: block !important;
 
 }
-#settings-btn, #add-realmlist-btn {
+#settings-btn, #add-realmlist-btn, #addaccount-btn {
 font-size: 150%;
 margin-top: *;
 margin-bottom:*;
