@@ -30,6 +30,7 @@ import * as Sciter from "@sciter";
  * @type {object}
  * @property {string} tbcFolderPath
  * @property {string} wotlkFolderPath
+ * @property {string} wotlkRealmlist
  * @property {string} appMode
  */
 
@@ -48,6 +49,7 @@ class DB {
       appSettings: {
         tbcFolderPath: '',
         wotlkFolderPath: '',
+        wotlkRealmlist: '',
         appMode: 'tbc'
       },
       accounts: []
@@ -176,18 +178,23 @@ class DB {
     return this.root.appSettings.appMode;
   }
   /**
-   * 
+   *
    * @returns {appSettings}
    */
   getAppSettings() {
     return this.root.appSettings
+  }
+  setWotlkRealmlist(realmPath) {
+    console.log(realmPath)
+    this.root.appSettings.wotlkRealmlist = realmPath;
+    this.storage.commit();
   }
   /**
    *
    * @param {"wotlkFolderPath" | "tbcFolderPath"} mode tbcFolderPath | wotlkFolderPath
    * @param {string} path wow folder path
    */
-  setWoWPath(mode, path) {
+  setWoWPath(mode, path='') {
     this.root.appSettings[mode] = path;
     this.storage.commit();
     console.log(this.root.appSettings)

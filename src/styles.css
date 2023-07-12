@@ -138,3 +138,11 @@ height: 300px;
   display: block;
   font-weight: bold;
 }
+
+.input-ok {
+  border-color: green;
+
+}
+.btn-ok {
+  background-color: green;
+}

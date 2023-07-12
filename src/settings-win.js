@@ -59,20 +59,29 @@ class Settings {
     const data = db.getAppSettings();
     const html = `
     <h1>enter path to WoW folders</h1>
-    <h3.input-title>TBC WOW PATH</h3>
+    <h3.input-title>TBC WOW FOLDER PATH</h3>
     <div.settings-input-wrap>
       <input|text(textEdit) .settings-input value="${data.tbcFolderPath}" key="tbcFolderPath"/> <button#settings-btn .path-edit .btn><icon|i-tick  .center /></button>
   </div>
 
     <div.test>
-    <h3.input-title>WoTLK WOW PATH</h3>
+    <h3.input-title>WoTLK WOW FOLDER PATH</h3>
     </div>
 
   <div.settings-input-wrap>
-    <input|text(textEdit) key="wotlkFolderPath" .settings-input value="${data.wotlkFolderPath}" novalue="D:\World of Warcraft 3.3.5a(example)"/> <button#settings-btn .btn><icon|i-tick  .path-edit .center/></button>
+    <input|text(textEdit) key="wotlkFolderPath"  .settings-input value="${data.wotlkFolderPath}" novalue="D:\World of Warcraft 3.3.5a(example)"/> <button#settings-btn .path-edit .btn ><icon|i-tick  .path-edit .center/></button>
   </div>
+  <h3.input-title>WoTLK REALMLIST FOLDER PATH</h3>
+  <div.settings-input-wrap>
+  <input|text(textEdit) key="wotlkFolderPath"  .settings-input value="${data.wotlkRealmlist}" /> <button#settings-btn .realmlist-path-edit.btn ><icon|i-tick   .center/></button>
+</div>
     `;
     this.rootHtml.innerHTML = html;
+  }
+
+  toggleGreen(btn, input){
+    btn.style.setProperty("background-color", "green")
+    input.style.setProperty("border-color", "green")
   }
 
   renderSettings(pageStr) {
@@ -106,7 +115,14 @@ document.on('click', 'button.realm-edit', function (e) {
   const inputValue = parent.querySelector('input').value;
   const id = parent.getAttribute('key');
   db.editRealmList(id, inputValue);
-  settings.realmListsHTML();
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
+});
+
+document.on('click', '.realmlist-path-edit', function (e) {
+  const parent = e.target.parentElement;
+  const inputValue = parent.querySelector('input').value;
+  db.setWotlkRealmlist(inputValue);
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
 });
 
 document.on('click', '#add-realmlist-btn', function (e) {
@@ -130,12 +146,16 @@ document.on('click', '.acc-edit', (e) => {
   const id = e.target.parentElement.getAttribute('key');
   const name = e.target.parentElement.querySelector('input').value;
   db.editAccName(id, name);
-  settings.accountsHTML();
+
+//  settings.accountsHTML();
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
+
 });
 
 document.on('click', '.path-edit', e => {
   const input = e.target.parentElement.querySelector('input')
-  db.setWoWPath( input.getAttribute("key"),input.value)
+  db.setWoWPath( input.getAttribute("key"),input.value);
+  settings.toggleGreen(e.target, input)
 })
 
 document.on('ready', function () {
