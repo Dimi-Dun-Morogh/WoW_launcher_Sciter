@@ -185,7 +185,6 @@ class DB {
     return this.root.appSettings
   }
   setWotlkRealmlist(realmPath) {
-    console.log(realmPath)
     this.root.appSettings.wotlkRealmlist = realmPath;
     this.storage.commit();
   }
@@ -197,7 +196,6 @@ class DB {
   setWoWPath(mode, path='') {
     this.root.appSettings[mode] = path;
     this.storage.commit();
-    console.log(this.root.appSettings)
   }
 
   eventDbUpdate() {

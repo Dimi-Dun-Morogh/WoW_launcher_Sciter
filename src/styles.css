@@ -1,10 +1,22 @@
+html {
+  window-min-width: 850px;
+  min-height: 300px;
+}
+
 body {
-  background-image: url("./bgtbc.JPG");
+  background-image: url("assets/bgtbc.JPG");
+  background-size:100% 100%;
+  font-size: 110%;
+  margin: 0;
+
 }
 #container{
   flow: horizontal;
   height: *;
   border-spacing: *;
+  padding-left: 5px;
+  padding-right: 5px;
+
 }
 #launch-btn{
 
@@ -24,13 +36,15 @@ body {
 }
 #middle-section{
   min-width: 25%;
-  padding: 10px;
-  padding-top: 20px;
+  /* padding: 10px; */
+  padding-top: 40px;
 }
 #middle-up {
 
   flow: horizontal;
   background-color: rgba(245, 250, 246, 0.6);
+  border-radius: 5%;
+
 }
 #wow-v-select{
   font-size: 150%;
@@ -41,8 +55,9 @@ body {
 }
 select|list {
 display:block;
-overflow-y: scroll-indicator;
+/* overflow-y: scroll-indicator; */
 width: 1*;
+height: 200px;
 }
 .center{
 margin-left: auto;
@@ -122,8 +137,9 @@ font-weight: bold;
 
 #settings-inner {
   background-color: rgba(244, 238, 238, 0.4);
-height: 300px;
-  width: 500px;
+  /* height: 300px;
+  width: 500px; */
+  height: *;
   horizontal-align:center;
   overflow-y: scroll;
 }
@@ -145,4 +161,79 @@ height: 300px;
 }
 .btn-ok {
   background-color: green;
+}
+
+@media width >= 800 {
+  #settings-inner {
+    font-size: 130%;
+  }
+  .settings-input {
+    height: *;
+    width: 500px;
+  }
+  .input-title{
+    font-size: 130%;
+  }
+
+  .settings-input-wrap  {
+    height: 50px;
+  }
+}
+
+@media width > 850
+{
+  body {
+    font-size: 130%;
+  }
+
+	select|list {
+    height: 300px;
+  }
+  .settings-input-wrap  {
+    height: 60px;
+  }
+}
+@media width >= 1000 {
+  #settings-inner {
+    font-size: 160%;
+  }
+  .settings-input {
+    height: *;
+    width: 700px;
+  }
+  .input-title{
+    font-size: 150%;
+  }
+
+  .settings-input-wrap  {
+    height: 75px;
+  }
+}
+
+@media width >= 1280
+{
+  body {
+    font-size: 160%;
+  }
+
+	select|list {
+    height: 400px;
+  }
+  #settings-inner {
+
+  }
+}
+
+@media width >= 1600
+{
+  body {
+    font-size: 200%;
+  }
+
+	select|list {
+    height: 900px;
+  }
+  #settings-inner {
+
+  }
 }

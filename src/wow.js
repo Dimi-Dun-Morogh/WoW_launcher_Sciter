@@ -10,7 +10,7 @@ export class Wow {
 
   static async realmlistChange(path, realmlist) {
     if(!realmlist) return;
-    const realmlistpath =  `${path}\/realmlist.wtf`;
+    const realmlistpath =  `${this.checkForSlash(path)}\/realmlist.wtf`;
     const file = sys.fs.openSync(realmlistpath, 'w');
     const buffer = encode(realmlist, "utf-8")
     await file.write(buffer);
@@ -19,7 +19,7 @@ export class Wow {
 
   static async addAccLogin(path, login) {
     if(!login) return;
-    const settingsPath = `${path}\\WTF\\Config.wtf`;
+    const settingsPath = `${this.checkForSlash(path)}\\WTF\\Config.wtf`;
     const file = await sys.fs.open(settingsPath, 'as+');
     const arrayBuffer = await file.read()
     const decoded = decode(arrayBuffer, "utf-8");
@@ -27,6 +27,10 @@ export class Wow {
     const res = decoded.split('\n').filter(el=>!el.includes("SET accountName")).join("\n")+`SET accountName ${login}`;
     await file.write(encode(res));
     await file.close()
+  }
+  static checkForSlash(str) {
+    if(str[str.length-1] ===  "\\") return str.slice(0,str.length-1)
+    return str
   }
 }
 

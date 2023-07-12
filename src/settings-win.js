@@ -35,7 +35,6 @@ class Settings {
 
   accountsHTML() {
     const accounts = db.getAllAccs();
-    console.log(accounts);
     const html = `
     <h1>edit accounts</h1>
     <div.settings-input-wrap .add-settings-wrap>
@@ -61,7 +60,7 @@ class Settings {
     <h1>enter path to WoW folders</h1>
     <h3.input-title>TBC WOW FOLDER PATH</h3>
     <div.settings-input-wrap>
-      <input|text(textEdit) .settings-input value="${data.tbcFolderPath}" key="tbcFolderPath"/> <button#settings-btn .path-edit .btn><icon|i-tick  .center /></button>
+      <input|text(textEdit) #tbc-path-input .settings-input value="${data.tbcFolderPath}" key="tbcFolderPath"/> <button#settings-btn .path-edit .btn><icon|i-tick  .center /></button>
   </div>
 
     <div.test>
@@ -77,6 +76,7 @@ class Settings {
 </div>
     `;
     this.rootHtml.innerHTML = html;
+    document.querySelector('#tbc-path-input').state.focus = true;
   }
 
   toggleGreen(btn, input){
@@ -100,6 +100,7 @@ class Settings {
         break;
     }
   }
+
 }
 
 const settings = new Settings(document.querySelector('#settings-inner'));
