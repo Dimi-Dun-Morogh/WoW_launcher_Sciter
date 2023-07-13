@@ -24,7 +24,7 @@ export class Wow {
     const arrayBuffer = await file.read()
     const decoded = decode(arrayBuffer, "utf-8");
     // SET accountName
-    const res = decoded.split('\n').filter(el=>!el.includes("SET accountName")).join("\n")+`SET accountName ${login}`;
+    const res = decoded.split('\n').filter(el=>!el.includes("SET accountName")).join("\n")+`\nSET accountName ${login}`;
     await file.write(encode(res));
     await file.close()
   }
