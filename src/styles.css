@@ -3,6 +3,16 @@ html {
   min-height: 300px;
 }
 
+h2, h3 {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+background-color: #fff;
+ margin-left: 5%;
+ margin-right: 5%;
+ border: 1px solid #640402;
+}
+
 body {
   background-image: url("assets/bgtbc.JPG");
   background-size:100% 100%;
@@ -24,9 +34,9 @@ body {
 
   margin-left: 0.5*;
   margin-right: 0.5*;
-  margin-top: *;
+  /* margin-top: *; */
   width: 80%;
-  margin-bottom:*;
+  /* margin-bottom:*; */
   font-size: 150%;
   font-weight: bold;
 }
@@ -37,22 +47,22 @@ body {
 #middle-section{
   min-width: 25%;
   /* padding: 10px; */
-  padding-top: 40px;
+  /* padding-top: 40px; */
 }
 #middle-up {
 
-  flow: horizontal;
+  /* flow: horizontal; */
   background-color: rgba(245, 250, 246, 0.6);
   border-radius: 5%;
 
 }
-#wow-v-select{
+/* #wow-v-select{
   font-size: 150%;
   font-weight: bold;
   margin-left:1*;
   margin-top: *;
   margin-bottom:*;
-}
+} */
 select|list {
 display:block;
 /* overflow-y: scroll-indicator; */
@@ -67,9 +77,6 @@ display: block !important;
 }
 #settings-btn, #add-realmlist-btn, #addaccount-btn {
 font-size: 150%;
-margin-top: *;
-margin-bottom:*;
-
 }
 .column-header{
 padding-top: 30px;
@@ -78,6 +85,10 @@ background-color: rgba(245, 250, 246, 0.6);
 .column-header  icon {
 
 padding-left: 10px;
+}
+
+#path-select-wrap{
+  /* height: 80%; */
 }
 
 .btn{
@@ -140,8 +151,10 @@ font-weight: bold;
   /* height: 300px;
   width: 500px; */
   height: *;
+ flow:vertical;
   horizontal-align:center;
   overflow-y: scroll;
+  padding-bottom: 15px;
 }
 #settings-inner h1 {
   margin-right: *;
@@ -161,6 +174,29 @@ font-weight: bold;
 }
 .btn-ok {
   background-color: green;
+}
+
+#wow_list_ok_btn {
+  width: 80%;
+  font-size: 150%;
+  text-transform: uppercase;
+  /* margin: auto 0; */
+}
+
+#wow-list {
+  height: 150px;
+}
+#add-wow-path-btn {
+  width: 40%;
+  /* margin-top: 10%; */
+  margin-bottom: 20px;
+  font-size: 150%;
+}
+
+
+.path-input {
+  width: 80%;
+  margin: 0;
 }
 
 @media width >= 800 {

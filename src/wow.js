@@ -4,13 +4,12 @@ import {encode, decode} from "@sciter";
 
 export class Wow {
   static launchWow(path) {
-    const exepath = path+`\/Wow.exe`;
-    env.exec(exepath)
+    env.exec(path)
   }
 
   static async realmlistChange(path, realmlist) {
     if(!realmlist) return;
-    const realmlistpath =  `${this.checkForSlash(path)}\/realmlist.wtf`;
+    const realmlistpath =  `${this.checkForSlash(path)}`;
     const file = sys.fs.openSync(realmlistpath, 'w');
     const buffer = encode(realmlist, "utf-8")
     await file.write(buffer);
@@ -19,7 +18,7 @@ export class Wow {
 
   static async addAccLogin(path, login) {
     if(!login) return;
-    const settingsPath = `${this.checkForSlash(path)}\\WTF\\Config.wtf`;
+    const settingsPath = `${this.checkForSlash(path)}`;
     const file = await sys.fs.open(settingsPath, 'as+');
     const arrayBuffer = await file.read()
     const decoded = decode(arrayBuffer, "utf-8");

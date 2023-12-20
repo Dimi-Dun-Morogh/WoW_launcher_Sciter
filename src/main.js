@@ -1,5 +1,6 @@
 import { db } from './db';
 import { Wow } from './wow';
+
 let settingsW, settingsH;
 const settingsWin = (screenName) => {
   Window.this.modal({
@@ -22,7 +23,7 @@ function renderRealmSelect() {
   let options = '';
 
   data.forEach((realm) => {
-    const option = `<option ${realm.selected ? 'selected=""' : ''} key=${
+    const option = `<option ${realm.selected ? 'selected' : ''} key=${
       realm.id
     }>${realm.realm}</option>`;
     options += option;
@@ -44,7 +45,7 @@ function renderAccSelect() {
    <select|list.select#acc-select>
    ${data.reduce(
      (acc, el) =>
-       (acc += `<option ${el.selected ? 'selected=""' : ''} key="${el.id}">${
+       (acc += `<option ${el.selected ? 'selected' : ''} key="${el.id}">${
          el.name
        }</option>`),
      '',
@@ -54,27 +55,35 @@ function renderAccSelect() {
   root.innerHTML = html;
 }
 
-function appMode() {
-  const data = db.getAppMode();
-  const btns = document
-    .querySelector('#wow-v-select')
-    .querySelectorAll('button');
-  btns.forEach((el) => {
-    if (el.getAttribute('key') === data) el.state.checked = true;
-    else el.state.checked = false;
-  });
-  document.body.style.backgroundImage = `url('assets/bg${data}.jpg')`;
+function renderGameSelect() {
+  const root = document.querySelector('#path-select-wrap');
+  const games = db.getWowPaths();
+  console.log(games)
+  let html = '';
+
+  games.forEach(game=>html+=`<option ${game.selected ? 'selected=""': ''} key=${game.id}  > ${game.wowId} </option>`);
+
+  root.innerHTML = `
+    <select|list.select #wow-list>
+      ${html}
+    </select>`;
 }
+
+
 
 document.on('ready', () => {
   renderRealmSelect();
   renderAccSelect();
-  appMode();
+  renderGameSelect();
+
 });
 document.on('beforeunload', () => db.destroy());
 
-const settingsBtn = document.querySelector('#settings-btn');
-settingsBtn.addEventListener('click', () => settingsWin('path_settings'));
+
+// events to open modal with apropriate props
+const settingsBtn = document.querySelector('#edit-wow-btn');
+settingsBtn.addEventListener('click', () => settingsWin('wow_list'));
+
 const realmListsBtn = document.querySelector('#realmlist-btn');
 realmListsBtn.addEventListener('click', () =>
   settingsWin('realmlist_settings'),
@@ -82,11 +91,11 @@ realmListsBtn.addEventListener('click', () =>
 const accountsBtn = document.querySelector('#accounts-btn');
 accountsBtn.addEventListener('click', () => settingsWin('accounts_settings'));
 
+
+
 document.querySelector('#launch-btn').addEventListener('click', async () => {
-  const { appMode, wotlkFolderPath, tbcFolderPath, wotlkRealmlist } =
+  const { exePath, realmPath, configPath } =
     db.getAppSettings();
-  const wowPath = appMode === 'tbc' ? tbcFolderPath : wotlkFolderPath;
-  const realmPath = appMode === 'tbc' ? tbcFolderPath : wotlkRealmlist;
 
   const realm = document
     .querySelector('#realm-select')
@@ -94,15 +103,16 @@ document.querySelector('#launch-btn').addEventListener('click', async () => {
   const acc = document
     .querySelector('#acc-select')
     .$('option:current')?.innerText;
-  await Wow.addAccLogin(wowPath, acc);
+  await Wow.addAccLogin(configPath, acc);
   await Wow.realmlistChange(realmPath, realm);
-  Wow.launchWow(wowPath);
+  Wow.launchWow(exePath);
 });
 
 document.on('db-update', () => {
   //re render
   renderRealmSelect();
   renderAccSelect();
+  renderGameSelect();
 });
 
 document.on('click', 'select#realm-select', (e) => {
@@ -115,11 +125,12 @@ document.on('click', 'select#acc-select', (e) => {
   db.selectAccount(key);
 });
 
-document.on('click', '#wow-v-select', (e) => {
+document.on('click', 'select#wow-list', (e) => {
   const key = e.target.getAttribute('key');
-  db.setAppMode(key);
-  document.body.style.backgroundImage = `url('assets/bg${key}.jpg')`;
+  db.selectWowPath(key);
 });
+
+
 
 function windowResizer() {
   let appWidth, appHeight;

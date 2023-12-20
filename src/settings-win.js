@@ -22,7 +22,7 @@ class Settings {
       inputHtml += inputWrap;
     });
     const html = `
-    <h1>edit realmlists</h1>
+    <h2>edit realmlists</h2>
     <div.settings-input-wrap .add-settings-wrap>
     <input|text(textEdit) .settings-input #addRealmInput novalue="set realmlist xxxxxx" value="set realmlist "/> <button#add-realmlist-btn .btn><icon|plus  .center/></button>
     <!-- <button#settings-btn .btn><icon|i-cross   .center/></button> -->
@@ -36,7 +36,7 @@ class Settings {
   accountsHTML() {
     const accounts = db.getAllAccs();
     const html = `
-    <h1>edit accounts</h1>
+    <h2>edit accounts</h2>
     <div.settings-input-wrap .add-settings-wrap>
       <input|text(textEdit) .settings-input  novalue="enter account name"/> <button#addaccount-btn .btn><icon|plus  .center/></button>
       <!-- <button#settings-btn  .btn><icon|i-cross   .center/></button> -->
@@ -54,34 +54,80 @@ class Settings {
     this.rootHtml.innerHTML = html;
   }
 
-  wowPathsHTML() {
-    const data = db.getAppSettings();
+  WoWListHTML() {
+    const data = db.getWowPaths();
     const html = `
-    <h1>enter path to WoW folders</h1>
-    <h3.input-title>TBC WOW FOLDER PATH</h3>
-    <div.settings-input-wrap>
-      <input|text(textEdit) #tbc-path-input .settings-input value="${data.tbcFolderPath}" key="tbcFolderPath"/> <button#settings-btn .path-edit .btn><icon|i-tick  .center /></button>
-  </div>
+    <h2> wow list</h2>
+    <button#add-wow-path-btn .wow-edit .btn><icon|i-plus  .center/></button>
+    ${data.reduce((acc, el) => {
+      acc += `
+      <div.settings-input-wrap key=${el.id}>
+      <input|text(textEdit) .settings-input value="${el.wowId}" disabled/>
+      <button#settings-btn .wow-edit .btn><icon|edit  .center /></button>
+      <button#settings-btn .wow-delete .btn><icon|i-cross   .center/></button>
+       </div>
+      `;
+      return acc;
+    }, '')}
 
-    <div.test>
-    <h3.input-title>WoTLK WOW FOLDER PATH</h3>
-    </div>
-
-  <div.settings-input-wrap>
-    <input|text(textEdit) key="wotlkFolderPath"  .settings-input value="${data.wotlkFolderPath}" novalue="D:\World of Warcraft 3.3.5a(example)"/> <button#settings-btn .path-edit .btn ><icon|i-tick  .path-edit .center/></button>
-  </div>
-  <h3.input-title>WoTLK REALMLIST FOLDER PATH</h3>
-  <div.settings-input-wrap>
-  <input|text(textEdit) key="wotlkFolderPath"  .settings-input value="${data.wotlkRealmlist}" /> <button#settings-btn .realmlist-path-edit.btn ><icon|i-tick   .center/></button>
-</div>
     `;
     this.rootHtml.innerHTML = html;
-    document.querySelector('#tbc-path-input').state.focus = true;
   }
 
-  toggleGreen(btn, input){
-    btn.style.setProperty("background-color", "green")
-    input.style.setProperty("border-color", "green")
+  wowPathsHTML(id) {
+    const data = id ? db.getWowPathsById(id) : {};
+    const html = `
+    <h2>paste .exe & realmlist paths</h2>
+    <form key=${id}>
+    <h3.input-title>WoW exe path</h3>
+    <div.settings-input-wrap>
+    <input|text(exePath) #tbc-path-input .settings-input .path-input
+
+    ${
+      data.exePath ? 'value=' + data.exePath : 'placeholder="D:\\WoW_TBC_2.4.3\\Wow.exe"'
+    }
+    />
+    </div>
+
+    <h3.input-title>realmlist path</h3>
+    <div.settings-input-wrap>
+    <input|text(realmPath) #tbc-path-input .settings-input .path-input  ${
+      data.realmPath ? 'value=' + data.realmPath : 'placeholder="D:\\WoW_TBC_2.4.3\\realmlist.wtf"'
+    }
+
+    />
+    </div>
+
+    <h3.input-title>WTF\\Config.wtf path</h3>
+    <div.settings-input-wrap>
+    <input|text(configPath) #tbc-path-input .settings-input .path-input  ${
+      data.configPath ? 'value=' + data.configPath : 'placeholder="D:\\WoW_TBC_2.4.3\\WTF\\Config.wtf"'
+    }
+
+    />
+    </div>
+
+    <h3.input-title>ID (ex. - TBC, Cata, etc)</h3>
+    <div.settings-input-wrap>
+    <input|text(wowId) #tbc-path-input .settings-input .path-input  ${
+      data.wowId ? 'value='+ data.wowId : 'placeholder="myWoW1"'
+    }/>
+    </div>
+
+
+    </form>
+    <button #wow_list_ok_btn .btn><icon|i-tick  .center /></button>
+    <p#test> ${id} </p>
+    `;
+
+    this.rootHtml.innerHTML = html;
+  }
+
+
+
+  toggleGreen(btn, input) {
+    btn.style.setProperty('background-color', 'green');
+    input.style.setProperty('border-color', 'green');
   }
 
   renderSettings(pageStr) {
@@ -95,16 +141,19 @@ class Settings {
       case 'path_settings':
         this.wowPathsHTML();
         break;
+      case 'wow_list':
+        this.WoWListHTML();
+        break;
       default:
         this.realmListsHTML();
         break;
     }
   }
-
 }
 
 const settings = new Settings(document.querySelector('#settings-inner'));
 
+//TODO use switch/case or something
 document.on('click', 'button.realm-delete-btn', function (e) {
   const id = e.target.parentElement.getAttribute('key');
   db.deleteRealmList(id);
@@ -116,14 +165,14 @@ document.on('click', 'button.realm-edit', function (e) {
   const inputValue = parent.querySelector('input').value;
   const id = parent.getAttribute('key');
   db.editRealmList(id, inputValue);
-  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'));
 });
 
 document.on('click', '.realmlist-path-edit', function (e) {
   const parent = e.target.parentElement;
   const inputValue = parent.querySelector('input').value;
   db.setWotlkRealmlist(inputValue);
-  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'));
 });
 
 document.on('click', '#add-realmlist-btn', function (e) {
@@ -148,22 +197,55 @@ document.on('click', '.acc-edit', (e) => {
   const name = e.target.parentElement.querySelector('input').value;
   db.editAccName(id, name);
 
-//  settings.accountsHTML();
-  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'))
-
+  settings.toggleGreen(e.target, e.target.parentElement.querySelector('input'));
 });
 
-document.on('click', '.path-edit', e => {
-  const input = e.target.parentElement.querySelector('input')
-  db.setWoWPath( input.getAttribute("key"),input.value);
-  settings.toggleGreen(e.target, input)
+document.on('click', '.path-edit', (e) => {
+  const input = e.target.parentElement.querySelector('input');
+  db.setWoWPath(input.getAttribute('key'), input.value);
+  settings.toggleGreen(e.target, input);
+});
+
+document.on('click', '.wow-edit', (e) => {
+  // const input = e.target.parentElement.querySelector('input')
+  // db.setWoWPath( input.getAttribute("key"),input.value);
+  // settings.toggleGreen(e.target, input)
+  const id = e.target.parentElement.getAttribute('key');
+
+  settings.wowPathsHTML(id);
+});
+
+document.on('click', '.wow-delete', e=>{
+  const id = e.target.parentElement.getAttribute('key');
+  db.deleteWowPaths(id);
+  settings.WoWListHTML();
 })
+
+document.on('click', '#wow_list_ok_btn', (e) => {
+  const values = document.$('form').value;
+
+  const { exePath, realmPath, wowId, configPath } = values;
+  if (exePath && realmPath && wowId) {
+    // document.$('#test').innerHTML = JSON.stringify(db, '  ');
+    //  document.$('#test').innerHTML = JSON.stringify(values);
+    const id = document.$('form').getAttribute('key');
+    if(id !=='null') {
+      db.updateWowPaths(id,{ exePath, realmPath, wowId, configPath })
+    } else {
+      db.addWowPaths({ exePath, realmPath, wowId, configPath });
+    }
+
+    settings.WoWListHTML();
+  }
+});
 
 document.on('ready', function () {
   var passedParameters = Window.this.parameters; // { foo:"bar" here }
 
   Window.this.caption = passedParameters.screenName;
   db = passedParameters.db;
+
+  // settings.renderSettings('wow_list');
 
   settings.renderSettings(passedParameters.screenName);
 });
