@@ -4,6 +4,7 @@ import {encode, decode} from "@sciter";
 
 export class Wow {
   static launchWow(path) {
+    console.log(path)
     env.exec(path)
   }
 
@@ -17,6 +18,7 @@ export class Wow {
   }
 
   static async addAccLogin(path, login) {
+    console.log(path)
     if(!login) return;
     const settingsPath = `${this.checkForSlash(path)}`;
     const file = await sys.fs.open(settingsPath, 'as+');

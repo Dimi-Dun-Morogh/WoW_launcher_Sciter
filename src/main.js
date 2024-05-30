@@ -1,7 +1,9 @@
-import { db } from './db';
+import { DB } from './db';
 import { Wow } from './wow';
 
+const db = new DB();
 let settingsW, settingsH;
+console.log('ht');
 const settingsWin = (screenName) => {
   Window.this.modal({
     url: __DIR__ + 'settings-window.htm',
@@ -72,6 +74,7 @@ function renderGameSelect() {
 
 
 document.on('ready', () => {
+  console.log('hit');
   renderRealmSelect();
   renderAccSelect();
   renderGameSelect();
@@ -85,8 +88,10 @@ const settingsBtn = document.querySelector('#edit-wow-btn');
 settingsBtn.addEventListener('click', () => settingsWin('wow_list'));
 
 const realmListsBtn = document.querySelector('#realmlist-btn');
-realmListsBtn.addEventListener('click', () =>
-  settingsWin('realmlist_settings'),
+realmListsBtn.addEventListener('click', () =>{
+   settingsWin('realmlist_settings')
+  console.log('ht')
+},
 );
 const accountsBtn = document.querySelector('#accounts-btn');
 accountsBtn.addEventListener('click', () => settingsWin('accounts_settings'));
@@ -134,7 +139,10 @@ document.on('click', 'select#wow-list', (e) => {
 
 function windowResizer() {
   let appWidth, appHeight;
-  const [, , monitorWidth, monitorHeight] = Window.this.screenBox('workarea');
+  let [, , monitorWidth, monitorHeight] = Window.this.screenBox('workarea');
+
+  //for  css testing
+  //  monitorWidth = 3840;
 
   switch (true) {
     case monitorWidth > 1600 && monitorWidth < 2560: //1920x1080 (Full HD or 1080p)

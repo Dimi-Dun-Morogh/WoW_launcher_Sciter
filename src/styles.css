@@ -39,6 +39,7 @@ body {
   /* margin-bottom:*; */
   font-size: 150%;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 #realmlist,#account{
@@ -75,7 +76,7 @@ margin-right: auto;
 display: block !important;
 
 }
-#settings-btn, #add-realmlist-btn, #addaccount-btn {
+#settings-btn, #add-realmlist-btn, #addaccount-btn, .wow-paths-btn {
 font-size: 150%;
 }
 .column-header{
@@ -197,6 +198,10 @@ font-weight: bold;
 .path-input {
   width: 80%;
   margin: 0;
+}
+
+.wow-paths-btn {
+  margin-left: 10px;
 }
 
 @media width >= 800 {

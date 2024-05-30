@@ -38,7 +38,7 @@ import * as Sciter from '@sciter';
  * @property {boolean} selected
  */
 
-class DB {
+export class DB {
   constructor() {
     const storage = Storage.open(Env.path('documents') + '/wow-launcher11.db');
     this.storage = storage;
@@ -211,7 +211,8 @@ class DB {
       }),
     );
   }
-  addWowPaths({ exePath, realmPath, wowId }) {
+  //TODO add default null values for realm config or in form 
+  addWowPaths({ exePath, realmPath, wowId,configPath }) {
     const selected = this.getWowPaths().length === 0;
     this.root.paths.unshift({
       exePath,
@@ -242,6 +243,7 @@ class DB {
     this.eventDbUpdate();
   }
   updateWowPaths(id, { exePath, realmPath, wowId, configPath }) {
+
     const paths = this.root.paths.map((el) => {
       if (el.id == id) {
         el.exePath = exePath;
@@ -281,4 +283,4 @@ class DB {
   }
 }
 
-export const db = new DB();
+
