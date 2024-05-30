@@ -135,8 +135,7 @@ document.on('click', 'select#wow-list', (e) => {
 
 document.querySelector('#of-btn').addEventListener('click', async () => {
   const { exePath } = db.getAppSettings();
-  // TODO open windows explorer
-  // const myStr = exePath.split('\\').slice(0,-1);
+  console.log(db.getAppSettings())
   console.log(exePath.split('\\').slice(0, -1).join('\\'));
    env.exec("explorer.exe", exePath.split('\\').slice(0, -1).join('\\'))
 });

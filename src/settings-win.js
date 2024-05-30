@@ -1,7 +1,7 @@
 // import { DB } from './db';
-// import { Wow } from './wow';
+// // import { Wow } from './wow';
 
-//const db = new DB();
+// const db = new DB();
 let db;
 
 class Settings {
@@ -77,6 +77,7 @@ class Settings {
 
   wowPathsHTML(id) {
     const data = id ? db.getWowPathsById(id) : {};
+
     const html = `
     <h2>your .exe & realmlist|config.wtf paths</h2>
 
@@ -87,7 +88,7 @@ class Settings {
 
     ${
       data.exePath
-        ? 'value=' + data.exePath
+        ? `value="${data.exePath}"`
         : 'placeholder="D:\\WoW_TBC_2.4.3\\Wow.exe"'
     }
     />
@@ -98,7 +99,7 @@ class Settings {
     <div.settings-input-wrap>
     <input|text(realmPath) disabled #tbc-path-input .settings-input .path-input  ${
       data.realmPath
-        ? 'value=' + data.realmPath
+        ? `value="${data.realmPath}"`
         : 'placeholder="D:\\WoW_TBC_2.4.3\\realmlist.wtf(example)"'
     }
 
@@ -110,7 +111,7 @@ class Settings {
     <div.settings-input-wrap>
     <input|text(configPath)  #tbc-path-input .settings-input .path-input disabled ${
       data.configPath
-        ? 'value=' + data.configPath
+        ? `value="${data.configPath}"`
         : 'placeholder="D:\\WoW_TBC_2.4.3\\WTF\\Config.wtf"'
     }
 
@@ -121,7 +122,7 @@ class Settings {
     <h3.input-title>ID (ex. - TBC, Cata, etc)</h3>
     <div.settings-input-wrap>
     <input|text(wowId) #tbc-path-input .settings-input .path-input  ${
-      data.wowId ? 'value=' + data.wowId : 'placeholder="myWoW1(example)"'
+      data.wowId ? `value="${data.wowId}"`  : 'placeholder="myWoW1(example)"'
     }/>
     </div>
 
@@ -282,7 +283,7 @@ document.on('ready', function () {
   Window.this.caption = passedParameters.screenName;
   db = passedParameters.db;
 
-  // settings.renderSettings('wow_list');
+  //  settings.renderSettings('wow_list');
 
   settings.renderSettings(passedParameters.screenName);
 });
