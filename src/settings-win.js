@@ -2,7 +2,7 @@
 // import { Wow } from './wow';
 
 //const db = new DB();
- let db;
+let db;
 
 class Settings {
   rootHtml;
@@ -59,7 +59,7 @@ class Settings {
     const data = db.getWowPaths();
     const html = `
     <h2> wow list</h2>
-    <button#add-wow-path-btn .wow-edit .btn><icon|i-plus  .center/></button>
+    <button#add-wow-path-btn .big-btn .wow-edit .btn><icon|i-plus  .center/></button>
     ${data.reduce((acc, el) => {
       acc += `
       <div.settings-input-wrap key=${el.id}>
@@ -78,7 +78,7 @@ class Settings {
   wowPathsHTML(id) {
     const data = id ? db.getWowPathsById(id) : {};
     const html = `
-    <h2>paste .exe & realmlist paths</h2>
+    <h2>your .exe & realmlist|config.wtf paths</h2>
 
     <form key=${id}>
     <h3.input-title>WoW exe path</h3>
@@ -99,7 +99,7 @@ class Settings {
     <input|text(realmPath) disabled #tbc-path-input .settings-input .path-input  ${
       data.realmPath
         ? 'value=' + data.realmPath
-        : 'placeholder="D:\\WoW_TBC_2.4.3\\realmlist.wtf"'
+        : 'placeholder="D:\\WoW_TBC_2.4.3\\realmlist.wtf(example)"'
     }
 
     />
@@ -121,7 +121,7 @@ class Settings {
     <h3.input-title>ID (ex. - TBC, Cata, etc)</h3>
     <div.settings-input-wrap>
     <input|text(wowId) #tbc-path-input .settings-input .path-input  ${
-      data.wowId ? 'value=' + data.wowId : 'placeholder="myWoW1"'
+      data.wowId ? 'value=' + data.wowId : 'placeholder="myWoW1(example)"'
     }/>
     </div>
 
@@ -230,9 +230,9 @@ document.on('click', '.wow-delete', (e) => {
 });
 
 document.on('click', '#wow_list_ok_btn', (e) => {
-  // TODO some error handlng on empty  value or add default 'null' to realmlist wtfconfig' 
+  // TODO some error handlng on empty  value or add default 'null' to realmlist wtfconfig'
   const values = document.$('form').value;
-  console.log(values)
+  console.log(values);
   const { exePath, realmPath, wowId, configPath } = values;
   if (exePath && realmPath && wowId) {
     const id = document.$('form').getAttribute('key');
@@ -262,9 +262,6 @@ document.on('click', '.wow-paths-btn', (e) => {
 
   const filePath = Window.this.selectFile({ mode: 'open', filter, caption });
   if (filePath) {
-    console.log('filepat');
-    // //! figure filter/caption based on data attribute; also where to write selected path
-    // //TODO! update input value;
     const inputName =
       dataAttr === 'exe-path'
         ? 'exePath'
@@ -272,17 +269,20 @@ document.on('click', '.wow-paths-btn', (e) => {
         ? 'realmPath'
         : 'configPath';
     const input = document.querySelector(`input[name="${inputName}"]`);
-    input.value = filePath.replace('file://', '').replaceAll('/', '\\').replaceAll('%20',' ');
+    input.value = filePath
+      .replace('file://', '')
+      .replaceAll('/', '\\')
+      .replaceAll('%20', ' ');
   }
 });
 
 document.on('ready', function () {
   var passedParameters = Window.this.parameters; // { foo:"bar" here }
 
-   Window.this.caption = passedParameters.screenName;
-   db = passedParameters.db;
+  Window.this.caption = passedParameters.screenName;
+  db = passedParameters.db;
 
   // settings.renderSettings('wow_list');
 
- settings.renderSettings(passedParameters.screenName);
+  settings.renderSettings(passedParameters.screenName);
 });

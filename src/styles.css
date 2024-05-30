@@ -28,7 +28,7 @@ body {
   padding-right: 5px;
 
 }
-#launch-btn{
+#launch-btn, .middle-ms-btn{
 
   display: block;
 
@@ -105,6 +105,9 @@ border-radius: 5px;
 color:#640402;
 cursor: pointer;
 }
+.big-btn {
+  border-width: 2px;
+}
 
 .select{
 font-weight: bold;
@@ -128,6 +131,7 @@ margin-top: 5px;
 .edit-select-btn{
 width: *;
 font-size: 130%;
+background-color: #076116;
 }
 
 .settings-input{

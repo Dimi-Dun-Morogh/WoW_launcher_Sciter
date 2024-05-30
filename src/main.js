@@ -1,5 +1,6 @@
 import { DB } from './db';
 import { Wow } from './wow';
+import * as env from '@env';
 
 const db = new DB();
 let settingsW, settingsH;
@@ -60,10 +61,15 @@ function renderAccSelect() {
 function renderGameSelect() {
   const root = document.querySelector('#path-select-wrap');
   const games = db.getWowPaths();
-  console.log(games)
+  console.log(games);
   let html = '';
 
-  games.forEach(game=>html+=`<option ${game.selected ? 'selected=""': ''} key=${game.id}  > ${game.wowId} </option>`);
+  games.forEach(
+    (game) =>
+      (html += `<option ${game.selected ? 'selected=""' : ''} key=${
+        game.id
+      }  > ${game.wowId} </option>`),
+  );
 
   root.innerHTML = `
     <select|list.select #wow-list>
@@ -71,36 +77,28 @@ function renderGameSelect() {
     </select>`;
 }
 
-
-
 document.on('ready', () => {
   console.log('hit');
   renderRealmSelect();
   renderAccSelect();
   renderGameSelect();
-
 });
 document.on('beforeunload', () => db.destroy());
-
 
 // events to open modal with apropriate props
 const settingsBtn = document.querySelector('#edit-wow-btn');
 settingsBtn.addEventListener('click', () => settingsWin('wow_list'));
 
 const realmListsBtn = document.querySelector('#realmlist-btn');
-realmListsBtn.addEventListener('click', () =>{
-   settingsWin('realmlist_settings')
-  console.log('ht')
-},
-);
+realmListsBtn.addEventListener('click', () => {
+  settingsWin('realmlist_settings');
+  console.log('ht');
+});
 const accountsBtn = document.querySelector('#accounts-btn');
 accountsBtn.addEventListener('click', () => settingsWin('accounts_settings'));
 
-
-
 document.querySelector('#launch-btn').addEventListener('click', async () => {
-  const { exePath, realmPath, configPath } =
-    db.getAppSettings();
+  const { exePath, realmPath, configPath } = db.getAppSettings();
 
   const realm = document
     .querySelector('#realm-select')
@@ -135,7 +133,13 @@ document.on('click', 'select#wow-list', (e) => {
   db.selectWowPath(key);
 });
 
-
+document.querySelector('#of-btn').addEventListener('click', async () => {
+  const { exePath } = db.getAppSettings();
+  // TODO open windows explorer
+  // const myStr = exePath.split('\\').slice(0,-1);
+  console.log(exePath.split('\\').slice(0, -1).join('\\'));
+   env.exec("explorer.exe", exePath.split('\\').slice(0, -1).join('\\'))
+});
 
 function windowResizer() {
   let appWidth, appHeight;
